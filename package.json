@@ -1,0 +1,14 @@
+{
+  "name": "web-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-flow": "^7.9.0",
+    "flow-bin": "^0.125.1",
+    "flow-remove-types": "^2.125.1",
+    "nodemon": "^2.0.3"
+  }
+}
