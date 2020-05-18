@@ -1,3 +1,5 @@
+export {}
+
 const a: string = '';
 
 const b: number = 1 // NaN  Infinity

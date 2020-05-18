@@ -4,3 +4,5 @@ var hello = function(name: string) {
 }
 
 hello('ts');
+
+export {}
