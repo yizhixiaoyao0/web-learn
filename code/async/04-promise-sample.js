@@ -11,3 +11,5 @@ promise.then(function(value) {
 }, function(error) {
   console.log(error);
 })
+
+
