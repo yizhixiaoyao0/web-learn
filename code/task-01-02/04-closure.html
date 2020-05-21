@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <script>
+    function makePower(power) {
+      return function(number) {
+        return Math.pow(number, power);
+      }
+    }
+  
+    let power2 = makePower(2);
+    
+    console.log(power2(5));
+  </script> -->
+
+  <script>
+    function makeSalary(base) {
+      return function (performance) {
+        return base + performance
+      }
+
+    }
+
+    let salaryLevel1 = makeSalary(120000);
+
+    console.log(salaryLevel1(2000));
+
+
+  </script>
+  
+</body>
+</html>
