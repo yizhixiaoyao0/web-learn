@@ -6,7 +6,7 @@ const {split, find} = require('lodash/fp');
 
 function readFile(filename) {
   return task(resolver => {
-    fs.readFile(filename, (err, data) {
+    fs.readFile(filename, (err, data) => {
       if (err) resolver.reject(err);
 
       resolver.resolve(data);
