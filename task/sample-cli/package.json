@@ -1,0 +1,11 @@
+{
+  "name": "sample-cli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": "lib/cli.js",
+  "devDependencies": {
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^7.1.0"
+  }
+}
