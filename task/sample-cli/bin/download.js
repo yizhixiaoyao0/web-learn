@@ -5,9 +5,7 @@ const path = require('path');
 const ora = require('ora')
 
 module.exports = (target) => {
-  target = path.join(target || '.', 'download-temp');
-
-  console.log(target, 'target')
+  target = path.join(target || '.', '.download-temp');
 
   return new Promise((resolve, reject) => {
     const url = 'direct:https://github.com/yizhixiaoyao0/base-module-vue.git#master';

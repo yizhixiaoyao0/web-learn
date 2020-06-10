@@ -5,6 +5,7 @@ const inquirer = require('inquirer');
 const glob = require('glob');
 const path = require('path');
 const fs = require('fs');
+const ejs = require('ejs');
 const program = require('commander');
 
 program.usage('<project-name>').parse(process.argv);
@@ -27,12 +28,12 @@ if (list.length) {
   if (list.filter(file => {
     // 获取文件绝对路径
     const fileName = path.resolve(process.cwd(), path.join('.', file));
-    const isDir = fs.statSync(fileName, (err) => { throw new Error('filename error')}).isDirectory();
+    const isDir = fs.statSync(fileName, (err) => { throw new Error('filename error') }).isDirectory();
 
     // 当前目录内文件不为空时， 判断是否存在
-    return file.indexOf(projectName) !== -1 && isDir
+    return file === projectName && isDir
 
-    }).length !== 0) {
+  }).length !== 0) {
 
     console.log(`Project ${projectName} already exists`)
     return
@@ -55,7 +56,7 @@ if (list.length) {
 
 init();
 
-function init () {
+function init() {
   rootName.then(projectRoot => {
     if (projectRoot !== '.') {
       fs.mkdirSync(projectRoot)
@@ -63,14 +64,15 @@ function init () {
     return download(projectRoot).then(target => {
       return {
         projectRoot,
-        downloadTemp: target
+        downloadTemp: target,
+        name: projectRoot,
       }
     })
   }).then(context => {
     return inquirer.prompt([
       {
         name: 'projectName',
-    	message: '项目的名称',
+        message: '项目的名称',
         default: context.name
       }, {
         name: 'projectVersion',
@@ -82,17 +84,76 @@ function init () {
         default: `A project named ${context.name}`
       }
     ]).then(answers => {
-      return latestVersion('base-module-vue').then(version => {
-        answers.supportUiVersion = version
-        return {
-          ...context,
-          metadata: {
-            ...answers
-          }
+      return {
+        ...context,
+        metadata: {
+          ...answers
         }
-      }).catch(err => {
-        return Promise.reject(err);
-      })
+      }
     })
-  }).then(context => console.log(context))
+  }).then((context) => {
+    const desDir = path.join(process.cwd(), context.projectRoot);
+    const temlDir = path.join(process.cwd(), context.downloadTemp);
+
+    const task = [];
+
+    copyFile(temlDir, desDir, context);
+
+    delDir(temlDir);
+  })
 }
+
+function delDir(path) {
+  let files = [];
+  if (fs.existsSync(path)) {
+    files = fs.readdirSync(path);
+    files.forEach((file, index) => {
+      let curPath = path + "/" + file;
+      if (fs.statSync(curPath).isDirectory()) {
+        delDir(curPath); //递归删除文件夹
+      } else {
+        fs.unlinkSync(curPath); //删除文件
+      }
+    });
+    fs.rmdirSync(path);
+  }
+}
+
+function copyFile(temlDir, desDir, context) {
+    
+  if (fs.existsSync(temlDir)) {
+    if (!fs.existsSync(desDir)) {
+      fs.mkdirSync(desDir);
+    }
+
+    // 将模板下的文件全部转换到目标目录
+    let files = fs.readdirSync(temlDir, { withFileTypes: true });
+    if (!files) throw new Error('err');
+
+    files.forEach(file => {
+      const teml = path.join(temlDir, file.name);
+      const des = path.join(desDir, file.name);
+      if (file.isFile()) {
+        // 通过模板引擎去渲染文件
+        ejs.renderFile(teml, context.metadata, (err, result) => {
+          if (err) throw err;
+
+          // 将结果写入目标
+          fs.writeFileSync(des, result);
+        })
+      } else {
+        try {
+          // 判断读(R_OK | W_OK)写权限
+          fs.accessSync(path.join(des, '..'), fs.constants.W_OK)
+          copyFile(teml, des, context)
+        } catch (error) {
+          console.log('folder write error:', error);
+        }
+      }
+    })
+    
+  } else {
+    console.log(temlDir, desDir)
+  }
+}
+
