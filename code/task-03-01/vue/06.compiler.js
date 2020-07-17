@@ -1,6 +1,6 @@
 class Compiler {
   constructor(vm) {
-    this.el = this.$el;
+    this.el = vm.$el;
     this.vm = vm;
     this.compile(this.el);
   }
@@ -18,7 +18,7 @@ class Compiler {
       
       // 判断node节点是否有子节点，如果有子节点，递归调用compiler
       if(node.childNodes && node.childNodes.length) {
-        this.compile(node.childNodes);
+        this.compile(node);
       }
     })
 
@@ -56,18 +56,18 @@ class Compiler {
     // 遍历所有的属性节点
     // 判断是否有指令
     Array.from(node.attributes).forEach(attr => {
-      let attrName = attr.arrtName
+      let attrName = attr.name
       if (this.isDirective(attrName)) {
         // v-text --> text
         attrName = attrName.substr(2);
 
         let key = attr.value;
 
-        this.update(node, key, attr);
+        this.update(node, key, attrName);
 
         new Watcher(this.vm, key, (newValue) => {
 
-          this.update(node, key, attr);
+          this.update(node, key, attrName);
         })
       }
     })
@@ -92,8 +92,8 @@ class Compiler {
 
 
   // 判断元素属性是否是指令
-  isDirective(arrtName) {
-    return arrtName.startsWith('v-')
+  isDirective(attrName) {
+    return attrName.startsWith('v-')
   }
 
   // 判断节点是否是文本节点

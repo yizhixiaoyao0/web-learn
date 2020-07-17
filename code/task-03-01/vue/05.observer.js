@@ -20,7 +20,7 @@ class Observer {
     let dep = new Dep();
     // 如果value 是对象，把value 内部的属性也转换为响应式数据
     this.wlak(value);
-    Object.defineProperties(data, key, {
+    Object.defineProperty(data, key, {
       enumerable: true,
       configurable: true,
       get () {
@@ -31,7 +31,7 @@ class Observer {
         if(newValue === value) {
           return 
         }
-        data[key] = newValue;
+        value = newValue;
         that.wlak(newValue);
         dep.notify()
       }
