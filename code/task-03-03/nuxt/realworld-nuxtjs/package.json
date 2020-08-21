@@ -1,0 +1,17 @@
+{
+  "name": "realworld-nuxtjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "nuxt": "^2.14.3"
+  },
+  "dependencies": {
+    "cookieparser": "^0.1.0",
+    "js-cookie": "^2.2.1"
+  }
+}
