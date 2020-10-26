@@ -1,9 +1,10 @@
 # web-learn
 > 前端学习笔记
 
-1. code文件夹下为代码
+1. code文件夹下为test代码
 2. interview文件夹为面试题整理
-3. task 作业文件夹
+3. task文件夹
+4. note 学习笔记
 
 
 纪录
