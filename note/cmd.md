@@ -28,9 +28,9 @@ git remote rename orign origin
 4.  代理
 
   ```bash
-  git config --global https.proxy http://127.0.0.1:1081
+  git config --global https.proxy http://127.0.0.1:10809
 
-  git config --global http.proxy http://127.0.0.1:1081
+  git config --global http.proxy http://127.0.0.1:10809
 
   git config --global --unset http.proxy
   
