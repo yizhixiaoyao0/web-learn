@@ -1,4 +1,4 @@
-function promiseAll(arr: any) {
+function promiseAll(arr) {
   let array = Array.from(arr);
   let resloveNum = 0;
   let len = array.length;
@@ -10,12 +10,16 @@ function promiseAll(arr: any) {
           res[i] = r;
           resloveNum++;
           if (resloveNum === len) {
-            reslove(res);
+            reject(res);
           }
         })
         .catch((re) => {
+          resloveNum++;
+          console.log(resloveNum);
           return reject(re);
         });
     }
   });
 }
+
+promiseAll([1, 2, 3]);
