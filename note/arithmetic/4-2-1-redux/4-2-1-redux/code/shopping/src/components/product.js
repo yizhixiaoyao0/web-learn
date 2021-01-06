@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as productActions from "../store/actions/product.actions";
-import * as cartActions from '../store/actions/cart.actions';
+import * as cartActions from "../store/actions/cart.actions";
 
 class Product extends Component {
+  // 组件挂载完成之后
   componentDidMount() {
     const { loadProducts } = this.props;
     // 向服务器端发送请求 获取商品列表数据
@@ -19,7 +20,11 @@ class Product extends Component {
         <div className="shop-items">
           {products.map((product) => (
             <div className="shop-item" key={product.id}>
-              <img className="shop-item-image" src={`http://localhost:3005${product.thumbnail}`} alt="" />
+              <img
+                className="shop-item-image"
+                src={`http://localhost:3005${product.thumbnail}`}
+                alt=""
+              />
               <span className="shop-item-title">{product.title}</span>
               <div className="shop-item-details">
                 <span className="shop-item-price">￥{product.price}</span>
@@ -45,7 +50,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators(productActions, dispatch),
-  ...bindActionCreators(cartActions, dispatch)
+  ...bindActionCreators(cartActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

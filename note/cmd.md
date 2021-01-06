@@ -36,3 +36,18 @@ git remote rename orign origin
   
   git config --global --unset https.proxy
   ```
+
+5. 杀进程 
+
+  ```bash
+
+  taskkill /f /im node.exe
+
+  ```
+
+6. 查看端口 
+
+  ```bash
+  netstat -aon|findstr "3000"
+
+  ```
