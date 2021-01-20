@@ -10,7 +10,7 @@ function promiseAll(arr) {
           res[i] = r;
           resloveNum++;
           if (resloveNum === len) {
-            reject(res);
+            reslove(res);
           }
         })
         .catch((re) => {
