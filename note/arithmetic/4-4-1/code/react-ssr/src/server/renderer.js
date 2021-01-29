@@ -16,7 +16,7 @@ export default (req, store) => {
   return `
   <html>
     <head>
-      <title>React SSR</title>
+      <title>React SSR</title>                    
     </head>
     <body>
       <div id="root">${content}</div>

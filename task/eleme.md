@@ -41,7 +41,7 @@ node 事件循环机制会有六个阶段: timers、 callbacks、 prepare、 pol
 
     2. cors
 
-        普通的跨域请求我们可以通过设置acess-control-allow-origin ,前端无需设置， 如果带cookie, 那就需要重写下响应头或者其他相应头的键， 需要设置服务器参数， 并且设置请求的时候设置withCreentials
+        普通的跨域请求我们可以通过设置acess-control-allow-origin ,前端无需设置， 如果带cookie, 那就需要重写下响应头或者其他响应头的键， 需要设置服务器参数， 并且设置请求的时候设置withCreentials
 
     3. 设置反向代理
 
@@ -96,9 +96,12 @@ node 事件循环机制会有六个阶段: timers、 callbacks、 prepare、 pol
 
 10. **http2和http1的区别, 优化**
 
+    http2比起http1.1 新增了多路复用以及首部压缩
+
+    http1.1协议中，浏览器客户端在同一时间内， 针对同一个域名下的请求有一定数量限制， 超过限制数目的请求会被堵塞，
+    http2的多路复用则允许通过单一的http2链接发起多重的请求-响应消息，可以很容易的去实现多流并行而不用依赖建立多个 TCP 连接，
+
       
-
-
     
 9. **node 错误处理**
 

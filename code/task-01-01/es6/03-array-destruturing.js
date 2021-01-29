@@ -27,7 +27,7 @@ console.log(more);  // default
 
 const path = '/foo/bar';
 
-const [, dir] = path.split('/');
+const [, dirs] = path.split('/');
 
-console.log(dir);
+console.log(dirs);
 
