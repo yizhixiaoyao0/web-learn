@@ -1,0 +1,40 @@
+<html>
+
+<head>
+   <title>WebRTC Video Demo</title>
+</head>
+
+<style>
+   body {
+      background: #eee;
+      padding: 5% 0;
+   }
+
+   video {
+      background: black;
+      border: 1px solid gray;
+   }
+
+   #localVideo {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      transform: rotateY(180deg);
+   }
+
+   #remoteVideo {
+      width: 500px;
+      height: 500px;
+   }
+</style>
+<video id="localVideo" autoplay></video>
+<video id = "remoteVideo" autoplay></video>
+
+<button id="callBtn">Call</button>
+<script src="client.js"></script>
+
+</body>
+
+</html>

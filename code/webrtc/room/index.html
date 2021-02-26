@@ -1,0 +1,41 @@
+<html>
+
+<head>
+   <title>WebRTC Video Demo</title>
+</head>
+
+<style>
+   body {
+      background: #eee;
+      padding: 5% 0;
+   }
+
+   video {
+      background: black;
+      border: 1px solid gray;
+   }
+
+   #localVideo {
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      transform: rotateY(180deg);
+   }
+
+   #remoteVideo {
+      width: 500px;
+      height: 500px;
+   }
+</style>
+<video id="localVideo" autoplay></video>
+<input id="accountInp" type="text" placeholder="请输入用户名"/>
+
+<button id="callBtn">登陆</button>
+
+<script src="room.js"></script>
+
+</body>
+
+</html>
